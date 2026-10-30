@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { db, SETTINGS_SALT } from './db'
 import { Onboarding } from './Onboarding'
+import { Tailor } from './Tailor'
 
 export default function App() {
   const [ready, setReady] = useState(false)
@@ -19,7 +20,7 @@ export default function App() {
   return (
     <main style={{ padding: '1rem' }}>
       <h1>Ideal Candidate</h1>
-      <p>[profile + resume tailor coming next]</p>
+      <Tailor />
     </main>
   )
 }
