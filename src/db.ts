@@ -9,9 +9,21 @@ export interface EncryptedRecord {
 }
 
 export interface ProfileRecord extends EncryptedRecord {}
-export interface DocumentRecord extends EncryptedRecord {}
-export interface JobRecord extends EncryptedRecord {}
-export interface ResumeVersionRecord extends EncryptedRecord {}
+export interface DocumentRecord extends EncryptedRecord {
+  name: string
+  mime: string
+  text?: string
+}
+export interface JobRecord extends EncryptedRecord {
+  title?: string
+  url?: string
+  status: 'saved' | 'applied' | 'interview' | 'offer' | 'rejected'
+}
+export interface ResumeVersionRecord extends EncryptedRecord {
+  jobId?: number
+  tailoredText: string
+  settingsSnapshot?: string
+}
 export interface SettingsRecord { key: string; value: string }
 
 export class IdealDB extends Dexie {
