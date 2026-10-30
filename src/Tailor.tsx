@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { type AISettings, type ChatMessage, buildSystemPrompt, chat } from './ai'
 import { wordDiff } from './diff'
+import { sanitizeText } from './sanitize'
 
 const DEFAULT_SETTINGS: AISettings = { endpoint: 'http://localhost:11434/v1', model: 'llama3.1', apiKey: '' }
 
@@ -16,7 +17,7 @@ export function Tailor() {
   async function tailor() {
     setBusy(true); setError('')
     try {
-      const system = buildSystemPrompt('You are a resume editor.', 'honest', jobText)
+      const system = buildSystemPrompt('You are a resume editor.', 'honest', sanitizeText(jobText))
       const messages: ChatMessage[] = [
         { role: 'system', content: system },
         { role: 'user', content: `Tailor this resume to the job. Output the full tailored resume only.\n\nResume:\n${resume}` },
